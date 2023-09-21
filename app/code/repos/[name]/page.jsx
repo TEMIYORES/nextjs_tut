@@ -1,4 +1,4 @@
-import RepoDirs from "@/app/RepoDirs";
+import RepoDirs from "@/app/components/RepoDirs";
 import Repo from "@/app/components/Repo";
 import Loading from "@/app/loading";
 import Link from "next/link";

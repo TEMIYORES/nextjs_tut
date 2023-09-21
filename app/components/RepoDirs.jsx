@@ -4,19 +4,24 @@ async function fetchDirs(name) {
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const response = await fetch(
-    `https://api.github.com/repos/TEMIYORES/${name}/contents`
+    `https://api.github.com/repos/TEMIYORES/${name}/contents`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
   );
   const repo = await response.json();
   return repo;
 }
 const RepoDirs = async ({ name }) => {
   const contents = await fetchDirs(name);
-  const dirs = contents.filter((content) => content.type == "dir");
+  // const dirs = contents.filter((content) => content.type == "dir");
   return (
     <>
-      <h3>Directories</h3>
+      <h3>Directories / Files</h3>
       <ul className="mx-5">
-        {dirs.map((dir) => {
+        {contents.map((dir) => {
           return (
             <li key={dir.path}>
               <Link href={`/code/repo/${name}/${dir.path}`}>{dir.path}</Link>

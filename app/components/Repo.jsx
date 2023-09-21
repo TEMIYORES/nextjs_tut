@@ -3,7 +3,12 @@ import { FaCodeBranch, FaEye, FaStar } from "react-icons/fa";
 
 async function fetchRepo(name) {
   const response = await fetch(
-    `https://api.github.com/repos/TEMIYORES/${name}`
+    `https://api.github.com/repos/TEMIYORES/${name}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
   );
   //   await new Promise((resolve) => setTimeout(resolve, 2000));
   const repos = await response.json();
